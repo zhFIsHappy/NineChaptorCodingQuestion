@@ -1,4 +1,8 @@
-public class Solution{
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class stringPermutationII{
     public List<String> stringPermutation2(String str){
         List<String> permutations = new ArrayList<String>();
         if(str == null) return permutations;
@@ -22,12 +26,12 @@ public class Solution{
                 continue;
             }
             
-            if(i > 0 && chr[i-1] == char[i] && !visited[i-1]){
+            if(i > 0 && chars[i-1] == chars[i] && !visited[i-1]){
                 continue;
             }
 
-            visited[i] = true
-            permutation.append(char[i]);
+            visited[i] = true;
+            permutation.append(chars[i]);
 
             dfs(chars, visited, permutation, permutations);
             visited[i] = false;

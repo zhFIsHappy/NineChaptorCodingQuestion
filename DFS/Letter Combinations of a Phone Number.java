@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
     public static final String[] KEYWORDS = {
         "",
@@ -26,14 +29,14 @@ class Solution {
     // combination 表示到目前位置所得到的组合
     // combinations 表示到目前为止找到的所有完整组合
     
-    private void dfs(String digits, int index, String combination, List<String> combinations){
+    private void dfs(String digits, String combination, int index, List<String> combinations){
         if(index == digits.length()){
             combinations.add(combination);
             return ;
         }
         int digit = digits.charAt(index) - '0';
 
-        for(int i = 0 i < KEYWORDS[digit].length(), i++){
+        for(int i = 0; i < KEYWORDS[digit].length(); i++){
             dfs(digits,index + 1, combination+KEYWORDS[digit].charAt(i), combinations);
         }
     }
