@@ -1,3 +1,8 @@
+
+
+
+
+
 /*
 // Definition for a Node.
 class Node {
@@ -19,15 +24,16 @@ class Node {
 */
 // TODO: Time Complexity: O(N+M) N is #of nodes, M is # of edges
 // TODO: Worst Case Senario: O(N^2)
+
 class Solution {
     public Node cloneGraph(Node node) {
         if(node == null) return null;
-        List<Node> nodes = findNodesByBFS(node); // Use BFS find every node
-        Map<Node, Node> mapping = copyNodes(nodes); // Use map to correspond old node to new node. Ex: A-> A' B->B' etc
-        copyEdges(nodes, mapping);                  // Copy and connect edges of old node to new ones
-        
-        return mapping.get(node);                   // Return Deep Copied node at end
+        List<Node> nodes = findNodesByBFS(node);
+        Map<Node,Node> mapping = copyNode(nodes);
+        copyEdges(nodes, mapping);
+        return mapping.get(node);
     }
+    
     private List<Node> findNodesByBFS(Node node){
         Queue<Node> queue = new ArrayDeque<>();
         Set<Node> visited = new HashSet<>();
@@ -40,28 +46,27 @@ class Solution {
                     continue;
                 }
                 visited.add(neighbor);
-                queue.offer(neighbor);
+                queue.add(neighbor);
             }
         }
         return new LinkedList<>(visited);
     }
     
-    private Map<Node, Node> copyNodes(List<Node> nodes){
-        Map<Node, Node> mapping = new HashMap<>();
-        for(Node node: nodes ){
-            mapping.put(node,new Node(node.val));
+    private Map<Node, Node> copyNode(List<Node> nodes){
+        Map<Node,Node> mapping = new HashMap<>();
+        for(Node node : nodes){
+            mapping.put(node, new Node(node.val));
         }
         return mapping;
     }
     
     private void copyEdges(List<Node> nodes, Map<Node, Node> mapping){
-        for(Node node : nodes){ // loop through List of Node
-            Node newNode = mapping.get(node); // pull out A' B' C' D'
-            for(Node neighbor :node.neighbors){ //loop through old neighbors 
-                Node newNeighbor = mapping.get(neighbor); // get old neighbors'edges
-                newNode.neighbors.add(newNeighbor); // add edges to new nodes's neighbors
+        for(Node node : nodes){ // 57 58 把copy 出来的 node 拿出来
+            Node newNode = mapping.get(node);
+            for(Node neighbor : node.neighbors){ // 旧的neighbor loop through
+                Node newNeighbor = mapping.get(neighbor); // 对应的新neighbor 放到 newNeighbor中
+                newNode.neighbors.add(newNeighbor); // 把新neighbor 给加到 新node 中
             }
-        } 
-    } 
+        }
+    }
 }
-
