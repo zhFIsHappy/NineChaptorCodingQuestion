@@ -14,7 +14,7 @@ public class stringPermutationII{
         return permutations;
     }
 
-
+    a b b
     public void dfs(char[] chars, boolean[] visited, StringBuilder permutation, List<String> permutations){
         if(permutation.length() == chars.length){
             permutations.add(permutation.toString());
@@ -29,12 +29,14 @@ public class stringPermutationII{
             if(i > 0 && chars[i-1] == chars[i] && !visited[i-1]){
                 continue;
             }
-
-            visited[i] = true;
-            permutation.append(chars[i]);
+            
+            visited[i] = true; a = true b1 = true
+            permutation.append(chars[i]); permutation[a,b]
 
             dfs(chars, visited, permutation, permutations);
-            visited[i] = false;
+
+            permutation.deleteCharAt(permutation.length() -1);
+            visited[i] = false; 
         }
     }
 }
