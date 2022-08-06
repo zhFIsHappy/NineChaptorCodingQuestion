@@ -1,22 +1,16 @@
 class BinaryTreeMaxmiumPathSum {
     int maxValue = Integer.MIN_VALUE;
-    public int max_gain(TreeNode root) {
-        // if root == null, then we have value of zero
-        if(root== null){
-            return 0;
-        }
-        // get the left/right child value, Math.max-> compare with 0 to eliminate negative case that not supposed to be added
-        int left = Math.max(max_gain(root.left),0); 
-        int right = Math.max(max_gain(root.right),0);
-        // calculate the current path sum
-        int curValue = left + right + root.val;
-        // update the maxValue
-        maxValue = Math.max(maxValue, curValue);
-        // get into the next level, cna only compute one branch but not two,specific complain is on the image attached
-        return root.val + Math.max(left, right);
-    }
-    public int maxPathSum(TreeNode root){
-        max_gain(root);
+    public maxSum (TreeNode root){
+        helper(root);
         return maxValue;
     }
+
+    private int helper(TreeNode root){
+        if(node == null) return 0;
+        int left = Math.max(0, helper(root.left));
+        int right = Math.max(0, helper(root.right));
+        maxValue = Math.max(maxValue, node.val + left + right);//横向， 全局的 拱形
+        return Math.max(left, right) + node.val; // 返回左右孩子中最大的那个 加上 本身node val， 纵向最大值
+    }
+    
 }
